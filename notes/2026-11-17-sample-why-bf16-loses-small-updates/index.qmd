@@ -1,0 +1,50 @@
+---
+title: "Sample: why bf16 loses small updates"
+description: "A sample post to see how maths, code and callouts look. Draft; delete when done."
+date: 2026-11-17
+categories: [sample, numerics]
+draft: true
+---
+
+Training in bf16 halves memory traffic, but a small weight update can vanish
+completely. This post works out exactly when.
+
+## How a bf16 number is stored
+
+A bf16 number has 1 sign bit, 8 exponent bits and 7 mantissa bits:
+
+$$
+x = (-1)^s \times 1.m \times 2^{e - 127}
+$$
+
+With 7 mantissa bits, the gap between neighbouring numbers near $x$ is
+
+$$
+\text{gap}(x) = 2^{\lfloor \log_2 |x| \rfloor - 7}.
+$$
+
+Near $x = 1$ the gap is $2^{-7} \approx 0.0078$.
+
+## When an update disappears
+
+Round-to-nearest drops any update smaller than half the gap. So the update
+$w \leftarrow w - \eta g$ is lost whenever
+
+$$
+|\eta g| < \tfrac{1}{2}\,\text{gap}(w) = 2^{\lfloor \log_2 |w| \rfloor - 8}.
+$$
+
+For $w = 1$, learning rate $\eta = 10^{-3}$ and gradient $g = 1$, the update is
+$10^{-3}$, below half the gap ($\approx 0.0039$), so the weight never moves.
+
+```python
+import torch
+w = torch.tensor(1.0, dtype=torch.bfloat16)
+print(w - 1e-3)   # tensor(1., dtype=torch.bfloat16): the update vanished
+```
+
+::: {.callout-tip}
+## The fix
+Keep an fp32 master copy of the weights and apply updates there. fp32 has 23
+mantissa bits, so its gap near 1 is $2^{-23} \approx 1.2 \times 10^{-7}$.
+:::

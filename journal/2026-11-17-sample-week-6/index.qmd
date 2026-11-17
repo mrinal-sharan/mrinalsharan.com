@@ -1,0 +1,21 @@
+---
+title: "Sample: week 6"
+description: "A sample journal entry with a little maths. Draft; delete when done."
+date: 2026-11-17
+categories: [sample]
+draft: true
+---
+
+**Did.** Finished PMPP chapter 5. Tiled matmul cuts global-memory reads by a
+factor of the tile width $T$: each input element is loaded $n/T$ times
+instead of $n$ times.
+
+**Learned.** For an $n \times n$ matmul the arithmetic intensity is
+
+$$
+\frac{2n^3 \text{ FLOPs}}{3n^2 \times 4 \text{ bytes}} = \frac{n}{6} \text{ FLOP/byte},
+$$
+
+so big matrices are compute-bound, not memory-bound.
+
+**Next.** Profile it in Nsight Compute.
