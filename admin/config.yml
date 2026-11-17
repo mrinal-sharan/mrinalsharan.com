@@ -3,7 +3,7 @@
 # Docs: https://sveltiacms.app/en/docs
 backend:
   name: github
-  repo: YutaOkkotsu16/mrinalsharan.com
+  repo: mrinal-sharan/mrinalsharan.com
   branch: main
   commit_messages:
     create: "Post: create {{slug}}"
@@ -12,8 +12,8 @@ backend:
     uploadMedia: "Post: upload {{path}}"
     deleteMedia: "Post: delete {{path}}"
 
-site_url: https://yutaokkotsu16.github.io/mrinalsharan.com  # TODO(domain)
-display_url: https://yutaokkotsu16.github.io/mrinalsharan.com
+site_url: https://mrinal-sharan.github.io/mrinalsharan.com  # TODO(domain)
+display_url: https://mrinal-sharan.github.io/mrinalsharan.com
 
 # Fallback only; each post's images are saved in its own folder (see below).
 media_folder: assets/uploads
