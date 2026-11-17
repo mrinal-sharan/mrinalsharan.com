@@ -1,0 +1,10 @@
+---
+title: First Blog
+description: fOR MY TECHNICAL prep
+date: 2026-11-17
+categories: []
+image: ''
+draft: true
+---
+
+dshihfsdhsdhkdfwhwwhiwdhwidhwidhwidiwdhwidhwidhihwdhiwdhiwdwd
