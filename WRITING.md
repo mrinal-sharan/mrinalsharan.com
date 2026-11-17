@@ -3,7 +3,7 @@
 ## Write in the browser (easiest)
 
 1. Open `https://mrinal-sharan.github.io/mrinalsharan.com/admin/`.
-2. First time only: **Sign In with Token**. Make the token at GitHub →
+2. First time only: **Sign In Using Access Token** (not "Sign In with GitHub", which needs an extra login service). Make the token at GitHub →
    Settings → Developer settings → Fine-grained tokens: repository
    `mrinalsharan.com` only, permission **Contents: Read and write**, expiry 90
    days. It is stored in this browser only; never paste it anywhere else.
