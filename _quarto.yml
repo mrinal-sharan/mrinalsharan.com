@@ -11,6 +11,8 @@ project:
     - robots.txt
     - assets/social-card.png
     - assets/photo.*
+    - admin/index.html   # in-browser editor (Sveltia CMS), copied as-is
+    - admin/config.yml
 
 execute:
   # Code is only re-run when its source changes, and the results are committed

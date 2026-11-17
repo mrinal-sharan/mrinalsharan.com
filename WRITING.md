@@ -1,6 +1,22 @@
 # Writing cheat sheet
 
-## The loop
+## Write in the browser (easiest)
+
+1. Open `https://yutaokkotsu16.github.io/mrinalsharan.com/admin/`.
+2. First time only: **Sign In with Token**. Make the token at GitHub →
+   Settings → Developer settings → Fine-grained tokens: repository
+   `mrinalsharan.com` only, permission **Contents: Read and write**, expiry 90
+   days. It is stored in this browser only; never paste it anywhere else.
+3. **Notes** or **Journal** → **New**. Write in the editor; paste or drag
+   pictures straight in (they are saved in the post's own folder).
+4. Maths: switch the editor to **Markdown** mode (toolbar) and type `$x^2$` or
+   `$$ ... $$`. Check it on the live page the first time.
+5. Untick **Draft** and **Save**. Live in ~1 min. Leave Draft ticked to keep
+   working on it later; drafts never go public.
+
+Code that runs, notebooks and citations still need the local loop below.
+
+## The local loop
 
 ```bash
 ./new.sh notes "Post title"        # or: ./new.sh journal "Post title"

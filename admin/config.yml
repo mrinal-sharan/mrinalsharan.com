@@ -1,0 +1,78 @@
+# Sveltia CMS: the in-browser editor at /admin/.
+# Every save is a commit to main, which redeploys the site (~1 min).
+# Docs: https://sveltiacms.app/en/docs
+backend:
+  name: github
+  repo: YutaOkkotsu16/mrinalsharan.com
+  branch: main
+  commit_messages:
+    create: "Post: create {{slug}}"
+    update: "Post: update {{slug}}"
+    delete: "Post: delete {{slug}}"
+    uploadMedia: "Post: upload {{path}}"
+    deleteMedia: "Post: delete {{path}}"
+
+site_url: https://yutaokkotsu16.github.io/mrinalsharan.com  # TODO(domain)
+display_url: https://yutaokkotsu16.github.io/mrinalsharan.com
+
+# Fallback only; each post's images are saved in its own folder (see below).
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: notes
+    label: Notes
+    label_singular: Note
+    description: "Longer technical posts."
+    folder: notes
+    path: "{{year}}-{{month}}-{{day}}-{{slug}}/index"
+    extension: qmd
+    format: yaml-frontmatter
+    media_folder: ""
+    public_folder: ""
+    create: true
+    sortable_fields: [date, title]
+    # Post fields, matching new.sh and WRITING.md. Reused by journal below.
+    fields: &post_fields
+      - { name: title, label: Title, widget: string }
+      - name: description
+        label: Description
+        widget: string
+        hint: "One sentence. Used in listings, link previews and ./share.sh."
+        required: false
+      - name: date
+        label: Date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+        default: "{{now}}"
+      - { name: categories, label: Tags, widget: list, required: false }
+      - name: image
+        label: Preview image
+        widget: image
+        required: false
+        hint: "Optional picture for link previews."
+      - name: draft
+        label: Draft (not public)
+        widget: boolean
+        default: true
+        hint: "Untick to publish. Drafts never go live."
+      - name: body
+        label: Post
+        widget: markdown
+        modes: [rich_text, raw]
+
+  - name: journal
+    label: Journal
+    label_singular: Journal entry
+    description: "Short, informal weekly logs."
+    folder: journal
+    path: "{{year}}-{{month}}-{{day}}-{{slug}}/index"
+    extension: qmd
+    format: yaml-frontmatter
+    media_folder: ""
+    public_folder: ""
+    create: true
+    sortable_fields: [date, title]
+    fields: *post_fields
